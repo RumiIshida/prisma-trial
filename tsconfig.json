@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    // "target": "es2016", // 修正
+    // "module": "commonjs", // 修正
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "isolatedModules": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "lib": ["ESNext", "DOM"],
+    "types": [
+      "vite/client",
+      "@cloudflare/workers-types/2023-07-01",
+      "node" // 追加
+    ],
+    "jsx": "react-jsx",
+    "jsxImportSource": "hono/jsx"
+  },
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["prisma/seed.ts"]
+}

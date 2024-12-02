@@ -1,0 +1,30 @@
+model Post {
+  id        Int      @id @default(autoincrement())
+  title     String   @db.NVarChar(255) @map("タイトル")
+  createdAt DateTime @default(now()) @db.DateTime @map("作成日")
+  content   String?  @db.NVarChar(max) @map("内容")
+  published Boolean  @default(false) @map("公開")
+  postUserId  Int   @map("投稿者ID")
+  User      User     @relation(fields: [postUserId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@map("投稿")
+}
+
+model Profile {
+  id     Int     @id @default(autoincrement())
+  bio    String?
+  userId Int     @unique
+  user   User    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@map("プロフィール")
+}
+
+model User {
+  id      Int      @id @default(autoincrement())
+  name    String?  @db.NVarChar(255) @map("名前")
+  email   String   @unique @db.VarChar(255) @map("メールアドレス")
+  Post    Post[]
+  Profile Profile?
+
+  @@map("ユーザー")
+}
